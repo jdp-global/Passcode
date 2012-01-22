@@ -17,7 +17,6 @@
 		C79F710013325C64007B9A22 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C79F70FF13325C64007B9A22 /* RootViewController.m */; };
 		C79F710313325C64007B9A22 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C79F710113325C64007B9A22 /* RootViewController.xib */; };
 		C79F710C13325C73007B9A22 /* KVPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C79F710A13325C73007B9A22 /* KVPasscodeViewController.m */; };
-		C79F710D13325C73007B9A22 /* KVPasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C79F710B13325C73007B9A22 /* KVPasscodeViewController.xib */; };
 		C79F710F1332670E007B9A22 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79F710E1332670E007B9A22 /* QuartzCore.framework */; };
 		C79F711213338C8F007B9A22 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79F711113338C8F007B9A22 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
@@ -39,7 +38,6 @@
 		C79F710213325C64007B9A22 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
 		C79F710913325C73007B9A22 /* KVPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KVPasscodeViewController.h; path = ../KVPasscodeViewController.h; sourceTree = "<group>"; };
 		C79F710A13325C73007B9A22 /* KVPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KVPasscodeViewController.m; path = ../KVPasscodeViewController.m; sourceTree = "<group>"; };
-		C79F710B13325C73007B9A22 /* KVPasscodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KVPasscodeViewController.xib; path = ../KVPasscodeViewController.xib; sourceTree = "<group>"; };
 		C79F710E1332670E007B9A22 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C79F711113338C8F007B9A22 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -65,7 +63,6 @@
 			children = (
 				C79F710913325C73007B9A22 /* KVPasscodeViewController.h */,
 				C79F710A13325C73007B9A22 /* KVPasscodeViewController.m */,
-				C79F710B13325C73007B9A22 /* KVPasscodeViewController.xib */,
 				C79F70EF13325C64007B9A22 /* PasscodeSample */,
 				C79F70E813325C64007B9A22 /* Frameworks */,
 				C79F70E613325C64007B9A22 /* Products */,
@@ -143,6 +140,7 @@
 		C79F70DC13325C64007B9A22 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = Koolistov;
 			};
 			buildConfigurationList = C79F70DF13325C64007B9A22 /* Build configuration list for PBXProject "PasscodeSample" */;
@@ -170,7 +168,6 @@
 				C79F70F413325C64007B9A22 /* InfoPlist.strings in Resources */,
 				C79F70FD13325C64007B9A22 /* MainWindow.xib in Resources */,
 				C79F710313325C64007B9A22 /* RootViewController.xib in Resources */,
-				C79F710D13325C73007B9A22 /* KVPasscodeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,10 +251,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PasscodeSample/PasscodeSample-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PasscodeSample/PasscodeSample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -268,9 +267,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PasscodeSample/PasscodeSample-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PasscodeSample/PasscodeSample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
@@ -297,6 +298,7 @@
 				C79F710813325C64007B9A22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

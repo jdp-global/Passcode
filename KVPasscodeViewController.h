@@ -47,31 +47,36 @@ typedef enum {
 @interface KVPasscodeViewController : UIViewController <UITextFieldDelegate> {
     id <KVPasscodeViewControllerDelegate> delegate;
     
-    IBOutlet UIView *animationView;
+    UIView *animationView;
     
-    IBOutlet UILabel *titleLabel;
-    IBOutlet UILabel *instructionLabel;
+    UILabel *titleLabel;
+    UILabel *instructionLabel;
     
-    IBOutlet UITextField *bulletField0;
-    IBOutlet UITextField *bulletField1;
-    IBOutlet UITextField *bulletField2;
-    IBOutlet UITextField *bulletField3;
+    UITextField *bulletField0;
+    UITextField *bulletField1;
+    UITextField *bulletField2;
+    UITextField *bulletField3;
  
     UITextField *fakeField;
 }
 
-@property (nonatomic, assign) id <KVPasscodeViewControllerDelegate> delegate; 
+@property (nonatomic, strong) id <KVPasscodeViewControllerDelegate> delegate; 
 
-@property (nonatomic, retain) IBOutlet UIView *animationView;
+@property (nonatomic, strong) UIView *animationView;
 
-@property (nonatomic, retain) IBOutlet UILabel *titleLabel;
-@property (nonatomic, retain) IBOutlet UILabel *instructionLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *instructionLabel;
 
-@property (nonatomic, retain) IBOutlet UITextField *bulletField0;
-@property (nonatomic, retain) IBOutlet UITextField *bulletField1;
-@property (nonatomic, retain) IBOutlet UITextField *bulletField2;
-@property (nonatomic, retain) IBOutlet UITextField *bulletField3;
+@property (nonatomic, strong) UITextField *bulletField0;
+@property (nonatomic, strong) UITextField *bulletField1;
+@property (nonatomic, strong) UITextField *bulletField2;
+@property (nonatomic, strong) UITextField *bulletField3;
 
 - (void)resetWithAnimation:(KVPasscodeAnimationStyle)animationStyle;
+- (void)setPasscodeBackgroundColor:(UIColor *)backgroundColor;
+- (void)setInstructionText:(NSString *)instructionText;
+- (void)setErrorText:(NSString *)errorText;
+- (void)setNavigationText:(NSString *)titleText;
+- (void)setTitleText:(NSString *)titleText;
 
 @end

@@ -33,7 +33,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioServices.h>
 
-@interface KVPasscodeViewController ()
+@interface KVPasscodeViewController () {
+    UIColor *defaultTextColor;
+}
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag;
 - (void)internalResetWithAnimation:(NSNumber *)animationStyleNumber;
@@ -55,25 +57,16 @@
 @synthesize bulletField2;
 @synthesize bulletField3;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)dealloc {
-    [animationView release], animationView = nil;
+    animationView = nil;
     
-    [titleLabel release], titleLabel = nil;
-    [instructionLabel release], instructionLabel = nil;
+    titleLabel = nil;
+    instructionLabel = nil;
     
-    [bulletField0 release], bulletField0 = nil;
-    [bulletField1 release], bulletField1 = nil;
-    [bulletField2 release], bulletField2 = nil;
-    [bulletField3 release], bulletField3 = nil;
-    [super dealloc];
+    bulletField0 = nil;
+    bulletField1 = nil;
+    bulletField2 = nil;
+    bulletField3 = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,7 +80,83 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    defaultTextColor = [UIColor colorWithRed:0.32f green:0.41f blue:0.47f alpha:1.0f];
+    
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    // Add animation view
+    animationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 204)];
+    [self.view addSubview:animationView];
+    
+    // Add Enter passcode label
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 31)];
+    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
+    titleLabel.textAlignment = UITextAlignmentCenter;
+    titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+    titleLabel.textColor = defaultTextColor;
+    titleLabel.shadowColor = [UIColor whiteColor];
+    titleLabel.shadowOffset = CGSizeMake(0, 1);
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.text = @"Enter your passcode:";
+    [animationView addSubview:titleLabel];
+    
+    // Add first passcode field
+    bulletField0 = [[UITextField alloc] initWithFrame:CGRectMake(30, 71, 56, 56)];
+    bulletField0.borderStyle = UITextBorderStyleBezel;
+    bulletField0.font = [UIFont fontWithName:@"Helvetica" size:32.0f];
+    bulletField0.textAlignment = UITextAlignmentCenter;
+    bulletField0.secureTextEntry = YES;
+    bulletField0.keyboardType = UIKeyboardTypeNumberPad;
+    bulletField0.backgroundColor = [UIColor whiteColor];
+    bulletField0.enabled = NO;
+    [animationView addSubview:bulletField0];
+    
+    // Add second passcode field
+    bulletField1 = [[UITextField alloc] initWithFrame:CGRectMake(98, 71, 56, 56)];
+    bulletField1.borderStyle = UITextBorderStyleBezel;
+    bulletField1.font = [UIFont fontWithName:@"Helvetica" size:32.0f];
+    bulletField1.textAlignment = UITextAlignmentCenter;
+    bulletField1.secureTextEntry = YES;
+    bulletField1.keyboardType = UIKeyboardTypeNumberPad;
+    bulletField1.backgroundColor = [UIColor whiteColor];
+    bulletField1.enabled = NO;
+    [animationView addSubview:bulletField1];
+    
+    // Add third passcode field
+    bulletField2 = [[UITextField alloc] initWithFrame:CGRectMake(161, 71, 56, 56)];
+    bulletField2.borderStyle = UITextBorderStyleBezel;
+    bulletField2.font = [UIFont fontWithName:@"Helvetica" size:32.0f];
+    bulletField2.textAlignment = UITextAlignmentCenter;
+    bulletField2.secureTextEntry = YES;
+    bulletField2.keyboardType = UIKeyboardTypeNumberPad;
+    bulletField2.backgroundColor = [UIColor whiteColor];
+    bulletField2.enabled = NO;
+    [animationView addSubview:bulletField2];
+    
+    // Add fourth passcode field
+    bulletField3 = [[UITextField alloc] initWithFrame:CGRectMake(234, 71, 56, 56)];
+    bulletField3.borderStyle = UITextBorderStyleBezel;
+    bulletField3.font = [UIFont fontWithName:@"Helvetica" size:32.0f];
+    bulletField3.textAlignment = UITextAlignmentCenter;
+    bulletField3.secureTextEntry = YES;
+    bulletField3.keyboardType = UIKeyboardTypeNumberPad;
+    bulletField3.backgroundColor = [UIColor whiteColor];
+    bulletField3.enabled = NO;
+    [animationView addSubview:bulletField3];
+    
+    // Add instructions label
+    instructionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 143, 300, 41)];
+    instructionLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+    instructionLabel.textAlignment = UITextAlignmentCenter;
+    instructionLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+    instructionLabel.textColor = defaultTextColor;
+    instructionLabel.shadowColor = [UIColor whiteColor];
+    instructionLabel.shadowOffset = CGSizeMake(0, 1);
+    instructionLabel.backgroundColor = [UIColor clearColor];
+    [animationView addSubview:instructionLabel];
+    
+    // Add fake field
     fakeField = [[UITextField alloc] initWithFrame:CGRectZero];
     fakeField.delegate = self;
     fakeField.keyboardType = UIKeyboardTypeNumberPad;
@@ -95,7 +164,6 @@
     fakeField.text = @"";
     [fakeField becomeFirstResponder];
     [self.view addSubview:fakeField];
-    [fakeField release];
     
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = NSLocalizedString(@"Passcode", @"");
@@ -118,6 +186,28 @@
     self.bulletField3 = nil;
 }
 
+- (void)setPasscodeBackgroundColor:(UIColor *)backgroundColor {
+    self.view.backgroundColor = backgroundColor;
+}
+
+- (void)setInstructionText:(NSString *)instructionText {
+    self.instructionLabel.text = instructionText;
+    self.instructionLabel.textColor = defaultTextColor;
+}
+
+- (void)setErrorText:(NSString *)errorText {
+    self.instructionLabel.text = errorText;
+    self.instructionLabel.textColor = [UIColor redColor];
+}
+
+- (void)setNavigationText:(NSString *)titleText {
+    self.navigationItem.title = titleText;
+}
+
+- (void)setTitleText:(NSString *)titleText {
+    self.navigationItem.title = titleText;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -127,7 +217,7 @@
     KVPasscodeAnimationStyle animationStyle = [animationStyleNumber intValue];
     switch (animationStyle) {
         case KVPasscodeAnimationStyleInvalid:
-            ;
+        {
             
             // Vibrate to indicate error
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
@@ -144,8 +234,9 @@
                                    CGPointMake([animationView center].x + 14.0f, [animationView center].y)]];
             [[animationView layer] addAnimation:animation forKey:@"position"];
             break;
+        }
         case KVPasscodeAnimationStyleConfirm:
-            ;
+        {
             
             // This will cause the 'new' fields to appear without bullets already in them
             self.bulletField0.text = nil;
@@ -163,6 +254,7 @@
             [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1]; 
             [[animationView layer] addAnimation:transition forKey:@"swipe"];
             break;
+        }
         case KVPasscodeAnimationStyleNone:
         default:
             self.bulletField0.text = nil;

@@ -15,8 +15,6 @@
     passcodeController.delegate = self;
     UINavigationController *passcodeNavigationController = [[UINavigationController alloc] initWithRootViewController:passcodeController];
     [self.navigationController presentModalViewController:passcodeNavigationController animated:YES];
-    [passcodeNavigationController release];
-    [passcodeController release];
 }
 
 #pragma mark - KVPasscodeViewControllerDelegate 
@@ -49,9 +47,5 @@
     // For example: self.myOutlet = nil;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 @end
