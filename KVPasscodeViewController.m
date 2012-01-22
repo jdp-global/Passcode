@@ -124,7 +124,7 @@
     [animationView addSubview:bulletField1];
     
     // Add third passcode field
-    bulletField2 = [[UITextField alloc] initWithFrame:CGRectMake(161, 71, 56, 56)];
+    bulletField2 = [[UITextField alloc] initWithFrame:CGRectMake(166, 71, 56, 56)];
     bulletField2.borderStyle = UITextBorderStyleBezel;
     bulletField2.font = [UIFont fontWithName:@"Helvetica" size:32.0f];
     bulletField2.textAlignment = UITextAlignmentCenter;
